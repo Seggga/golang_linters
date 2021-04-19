@@ -45,7 +45,7 @@ func TestEnumDirsMapFS(t *testing.T) {
 	conf := &ConfigType{}
 	conf.useStab()
 
-	stringSlice, _ := enumDirs(conf, mapFS)
+	stringSlice, _ := enumDirs(mapFS)
 
 	expectedStringSlice := []string{".", "test-folder1", "test-folder2", "test-folder3", "test-folder3/test-folder4"}
 	assert.ElementsMatch(t, stringSlice, expectedStringSlice, "slices not equal")

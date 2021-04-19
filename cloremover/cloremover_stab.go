@@ -2,8 +2,6 @@ package cloremover
 
 import (
 	"io/fs"
-	"os"
-	"path/filepath"
 	"testing/fstest"
 	"time"
 )
@@ -144,30 +142,6 @@ var mapFS = fstest.MapFS{
 }
 
 var sysVal int
-
-func createTestFiles() {
-
-	os.MkdirAll("test-folder", os.ModePerm)
-	os.MkdirAll(filepath.Join("test-folder", "test-folder1"), os.ModePerm)
-	os.MkdirAll(filepath.Join("test-folder", "test-folder2"), os.ModePerm)
-	os.MkdirAll(filepath.Join("test-folder", "test-folder3"), os.ModePerm)
-	os.MkdirAll(filepath.Join("test-folder", "test-folder3", "test-folder4"), os.ModePerm)
-	os.Create(filepath.Join("test-folder", "test-folder1", "clone1"))
-	os.Create(filepath.Join("test-folder", "test-folder1", "clone2"))
-	os.Create(filepath.Join("test-folder", "test-folder1", "unique1"))
-	os.Create(filepath.Join("test-folder", "test-folder2", "clone1"))
-	os.Create(filepath.Join("test-folder", "test-folder2", "clone3"))
-	os.Create(filepath.Join("test-folder", "test-folder2", "unique2"))
-	os.Create(filepath.Join("test-folder", "test-folder3", "clone1"))
-	os.Create(filepath.Join("test-folder", "test-folder3", "clone2"))
-	os.Create(filepath.Join("test-folder", "test-folder3", "unique3"))
-	os.Create(filepath.Join("test-folder", "test-folder3", "unique4"))
-	os.Create(filepath.Join("test-folder", "test-folder3", "test-folder4", "clone2"))
-	os.Create(filepath.Join("test-folder", "test-folder3", "test-folder4", "clone3"))
-	os.Create(filepath.Join("test-folder", "clone1"))
-	os.Create(filepath.Join("test-folder", "clone2"))
-
-}
 
 // stab for test with simple config
 func (c *ConfigType) useStab() {

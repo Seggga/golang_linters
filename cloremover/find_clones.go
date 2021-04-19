@@ -13,7 +13,7 @@ func FindClones(conf *ConfigType, log logrus.FieldLogger, fileSystem fs.FS) ([]f
 
 	//enumerate all subdirectories in the given dirPath
 	log.Debug("try to enumerate subdirectories in the given directory")
-	dirSlice, err := enumDirs(conf, fileSystem)
+	dirSlice, err := enumDirs(fileSystem)
 	if err != nil {
 		return nil, err
 	}
@@ -76,37 +76,11 @@ func enumFiles(dirPath string, ch chan<- fileData, fileSystem fs.FS) {
 }
 
 // enumDirs enumerates subdirectories in the given folder.
-func enumDirs(conf *ConfigType, fileSystem fs.FS) ([]string, error) {
-	/*
-
-		// get absolute directory path
-		dirPath, err := filepath.Abs(conf.DirPath)
-		if err != nil {
-			return nil, err
-		}
-
-		// check for dirPath existance
-		if _, err := os.Stat(dirPath); err != nil {
-			if os.IsNotExist(err) {
-				return nil, fmt.Errorf("Entered directory was not found ( %s )\n", dirPath)
-			} else {
-				return nil, err
-			}
-		}
-	*/
-	//conf.DirPath = dirPath
+func enumDirs(fileSystem fs.FS) ([]string, error) {
 
 	// get a slice of subdirectories
 	var dirSlice []string
-	/*
-		err = filepath.Walk(dirPath, func(path string, info os.FileInfo, err error) error {
-			if info.IsDir() {
-				dirSlice = append(dirSlice, path)
-			}
-			return nil
-		})
-	*/
-	//root := filepath.Base(filepath.Dir(conf.DirPath))
+
 	err := fs.WalkDir(fileSystem, ".", func(path string, d fs.DirEntry, err error) error {
 		if d.IsDir() {
 			dirSlice = append(dirSlice, path)
@@ -117,8 +91,6 @@ func enumDirs(conf *ConfigType, fileSystem fs.FS) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	//dirSlice = append(dirSlice, conf.DirPath)
-	//conf.DirPath = dirPath
 	return dirSlice, nil
 }
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Seggga/golang_3/02-clones_search/cloremover"
+	"github.com/seggga/golang_linters/cloremover"
 	"github.com/sirupsen/logrus"
 )
 

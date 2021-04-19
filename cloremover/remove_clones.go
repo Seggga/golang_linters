@@ -78,7 +78,7 @@ func chooseFile(numOfFiles uint32) (uint32, error) {
 	fmt.Print("Please, choose a number of file you want to delete (for example '3'). For exit enter 'q': ")
 	_, err := fmt.Scanln(&userInput)
 	if err != nil {
-		return 0, fmt.Errorf("There is an error entering data.\n%v", err)
+		return 0, fmt.Errorf("There is an error entering data.\n%w", err)
 	}
 	// user want to quit
 	if userInput == "q" || userInput == "Q" {
@@ -87,7 +87,7 @@ func chooseFile(numOfFiles uint32) (uint32, error) {
 	// user want to view specified file
 	userChoice, err := strconv.ParseInt(userInput, 0, 32)
 	if err != nil {
-		return 0, fmt.Errorf("Entered data cannot be recognized as number, %v", err)
+		return 0, fmt.Errorf("Entered data cannot be recognized as number, %w", err)
 	}
 	// check user input
 	if userChoice > int64(numOfFiles) || userChoice < 1 {
@@ -104,7 +104,7 @@ func chooseDir(numOfDirs uint32) (uint32, error) {
 	fmt.Print("Please, choose a number of directory you want the file to be removed from (for example '2'). For exit enter 'q': ")
 	_, err := fmt.Scanln(&userInput)
 	if err != nil {
-		return 0, fmt.Errorf("There is an error entering data.\n%v", err)
+		return 0, fmt.Errorf("There is an error entering data.\n%w", err)
 	}
 	// user want to quit
 	if userInput == "q" || userInput == "Q" {
@@ -113,7 +113,7 @@ func chooseDir(numOfDirs uint32) (uint32, error) {
 	// user want to delete a file frome specified directory
 	userChoice, err := strconv.ParseInt(userInput, 0, 32)
 	if err != nil {
-		return 0, fmt.Errorf("Entered data cannot be recognized as number, %v", err)
+		return 0, fmt.Errorf("Entered data cannot be recognized as number, %w", err)
 	}
 	// check user input
 	if userChoice > int64(numOfDirs) || userChoice <= 0 {
